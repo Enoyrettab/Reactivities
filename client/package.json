@@ -3957,6 +3957,7 @@
     "@tanstack/react-query-devtools": "^5.77.2",
     "@vitejs/plugin-react-swc": "^3.9.0",
     "axios": "^1.9.0",
+    "react-router": "^7.6.1",
     "vite": "^6.3.5"
   }
 }
