@@ -10,7 +10,7 @@ public class DbInitializer
 	{
 		if (context.Activities.Any()) return;
 
-		var activities = new List<Activity>
+		var activities = new List<ActivityDto>
 		{
 			new() {
 				Title = "Past Activity 1",

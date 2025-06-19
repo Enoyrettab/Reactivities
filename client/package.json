@@ -3962,6 +3962,7 @@
     "mobx-react-lite": "^4.1.0",
     "react-calendar": "^6.0.0",
     "react-router": "^7.6.1",
+    "react-toastify": "^11.0.5",
     "vite": "^6.3.5"
   }
 }
