@@ -47,8 +47,7 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTPS pipeline
 app.UseCors(o => o.AllowAnyHeader().AllowAnyMethod()
-.AllowCredentials()
-.WithOrigins("http://localhost:3000", "https://localhost:3000"));
+.AllowCredentials().WithOrigins("http://localhost:3000", "https://localhost:3000"));
 
 app.UseAuthentication();
 app.UseAuthorization();
