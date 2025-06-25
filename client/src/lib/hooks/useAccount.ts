@@ -1,15 +1,24 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import type { LoginSchema } from "../schemas/LoginSchema";
 import agent from "../api/agent";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import type { RegisterSchema } from "../schemas/registerSchema";
 import { toast } from "react-toastify";
 
 export const useAccount = () => {
 	const queryClient = useQueryClient();
 	const navigate = useNavigate();
-	const location = useLocation();
 	
+	const{data: currentUser, isLoading: loadingUserInfo} = useQuery({
+		queryKey: ['user'],
+		queryFn: async () => {
+			const response = await agent.get<User>('/account/user-info');
+			return response.data;
+			console.log(response.data);
+		},
+		enabled: !queryClient.getQueryData(['user']) 
+	})
+
 	const loginUser = useMutation ({
 		mutationFn: async (creds: LoginSchema) => {
 			await agent.post('/login?useCookies=true', creds);
@@ -40,17 +49,6 @@ export const useAccount = () => {
 			queryClient.removeQueries({queryKey: ['activities']});
 			navigate('/');
 		}
-	})
-
-	const{data: currentUser, isLoading: loadingUserInfo} = useQuery({
-		queryKey: ['user'],
-		queryFn: async () => {
-			const response = await agent.get<User>('/account/user-info');
-			return response.data;
-		},
-		enabled: !queryClient.getQueryData(['user']) 
-			&& location.pathname !== '/login'
-			&& location.pathname !== '/register'
 	})
 
 	return {
