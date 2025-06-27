@@ -23,7 +23,7 @@ agent.interceptors.request.use(
 
 agent.interceptors.response.use(
 	async response => {
-		await sleep(1000);
+		await sleep(100);
 		store.uiStore.isIdle();
 		return response;
 	},
