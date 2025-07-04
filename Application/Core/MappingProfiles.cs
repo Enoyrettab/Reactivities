@@ -14,6 +14,7 @@ public class MappingProfiles : Profile
 		CreateMap<Activity, Activity>();
 		CreateMap<CreateActivityDto, Activity>();
 		CreateMap<EditActivityDto, Activity>();
+		CreateMap<Activity, UserActivityDto>();
 		CreateMap<Activity, ActivityDto>()
 			.ForMember(d => d.HostDisplayName, o => o.MapFrom(s =>
 				s.Attendees.FirstOrDefault(x => x.IsHost)!.User.DisplayName))
