@@ -27,7 +27,7 @@ export default function ActivityForm() {
 				city: activity.city,
 				venue: activity.venue,
 				latitude: activity.latitude,
-				logitude: activity.logitude
+				longitude: activity.longitude
 			}
 		});
 	}, [activity, reset]);

@@ -1,7 +1,5 @@
 import { AccessTime, Place } from '@mui/icons-material';
-import { Avatar, Box, Button, CardHeader, Chip, Divider, Typography } from '@mui/material';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
+import { Avatar, Box, Button, Card, CardContent, CardHeader, Chip, Divider, Typography } from '@mui/material';
 import { Link } from 'react-router';
 import { formatDate } from '../../../lib/util/util';
 import AvatarPopover from '../../../app/shared/components/AvatarPopover';
@@ -11,7 +9,7 @@ type Props = {
 }
 export default function ActivityCard({activity}: Props) {
 	const label = activity.isHost ? 'You are hosting' : 'You are going';
-	const color = activity.isHost ? 'secondary' : activity.isGoing ? 'warning' : 'default;'
+	//const color = activity.isHost ? 'secondary' : activity.isGoing ? 'warning' : 'default;'
 
 	return (
 		<Card elevation={3} sx={{ borderRadius: 3 }}>

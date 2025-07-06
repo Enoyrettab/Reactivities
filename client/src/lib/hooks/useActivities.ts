@@ -3,6 +3,7 @@ import agent from "../api/agent";
 import { useLocation } from "react-router";
 import { useAccount } from "./useAccount";
 import { useStore } from "./useStore";
+import type { FieldValues } from "react-hook-form";
 
 export const useActivities = (id?: string) => {
 	const {activityStore: {filter, startDate}} = useStore();
@@ -76,7 +77,7 @@ export const useActivities = (id?: string) => {
  	 })
 
   	const createActivity = useMutation({
-		mutationFn: async (activity:Activity) => {
+		mutationFn: async (activity: FieldValues) => {
 			await agent.post('/activities', activity)
 		},
 		onSuccess: async() => {
@@ -132,6 +133,8 @@ export const useActivities = (id?: string) => {
 			return {prevActivity};
 		},
 		onError: (error, activityId, context) => {
+			console.log('prevActivity' + context?.prevActivity);
+            console.log(error);
 			if (context?.prevActivity) {
 				queryClient.setQueryData(['activities', activityId], context.prevActivity) 
 			}

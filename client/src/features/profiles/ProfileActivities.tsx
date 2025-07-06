@@ -4,8 +4,6 @@ import { useProfile } from "../../lib/hooks/useProfile";
 import { Box } from "@mui/system";
 import { Card, CardContent, CardMedia, Grid2, Tab, Tabs, Typography } from "@mui/material";
 import { format } from "date-fns";
-import { formatDate } from "../../lib/util/util";
-
 
 export default function ProfileActivities() {
 
