@@ -56,7 +56,7 @@ namespace API.Controllers
             var user = await signInManager.UserManager.Users
                                     .FirstOrDefaultAsync(x => x.Email == email || x.Id == userId);
 
-            if (user == null || string.IsNullOrEmpty(user.Email)) 
+            if (user == null || string.IsNullOrEmpty(user.Email))
                 return BadRequest("User not found");
             //TODO: change this to not send the confirmation and return OK anyway so the user doesn't know if
             //      the email they sent up is a valid email or not.
@@ -75,7 +75,7 @@ namespace API.Controllers
             await emailSender.SendConfirmationLinkAsync(user, email, confirmEmailUrl);
         }
 
-		[AllowAnonymous]
+        [AllowAnonymous]
         [HttpGet("user-info")]
         public async Task<ActionResult> GetUserInfo()
         {
@@ -98,8 +98,23 @@ namespace API.Controllers
         public async Task<ActionResult> Logout()
         {
             await signInManager.SignOutAsync();
-            
+
             return NoContent();
+        }
+
+        [HttpPost("change-password")]
+        public async Task<ActionResult> ChangePassword(ChangePasswordDto passwordDto)
+        {
+            var user = await signInManager.UserManager.GetUserAsync(User);
+
+            if (user == null) return Unauthorized();
+
+            var result = await signInManager.UserManager
+                            .ChangePasswordAsync(user, passwordDto.CurrentPassword, passwordDto.NewPassword);
+
+            if (result.Succeeded) return Ok();
+
+            return BadRequest(result.Errors.First().Description);
         }
 
     }
