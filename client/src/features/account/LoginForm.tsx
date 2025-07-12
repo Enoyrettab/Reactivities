@@ -3,7 +3,7 @@ import { useAccount } from "../../lib/hooks/useAccount";
 import { loginSchema, type LoginSchema } from "../../lib/schemas/LoginSchema";
 import { useForm } from "react-hook-form";
 import { Box, Button, Paper, Typography } from "@mui/material";
-import { LockOpen } from "@mui/icons-material";
+import { GitHub, LockOpen } from "@mui/icons-material";
 import TextInput from "../../app/shared/components/TextInput";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useState } from "react";
@@ -45,6 +45,13 @@ export default function LoginForm() {
 		});
 	}
 
+	const loginWithGithub = () => {
+		const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID;
+		const redirectUrl = import.meta.env.VITE_REDIRECT_URL;
+		window.location.href = 
+			`https://github.com/login/oauth/authorize?client_id=${clientId}&redirectUri=${redirectUrl}&scope=read:user user:email`
+	}
+
 	return (
 
 		<Paper component='form'
@@ -74,6 +81,16 @@ export default function LoginForm() {
 				size="large"
 			>
 				Login
+			</Button>
+			<Button
+				onClick={loginWithGithub}
+				startIcon={<GitHub />}
+				sx={{backgroundColor: 'black'}}
+				type="button"
+				variant="contained"
+				size="large"
+			>
+				Login with Github
 			</Button>
 			{notVerified ? (
 				<Box display='flex' flexDirection='column' justifyContent='center'>
